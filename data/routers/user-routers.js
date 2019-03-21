@@ -4,6 +4,12 @@ const Users = require('../helpers/userDb');
 
 const router = express.Router();
 
+function upperCase(req, res, next) {
+    const { name } = req.body;
+    name.toUpperCase;
+next();
+}
+
 router.get('/', (req, res) => {
     return Users.get()
     .then(users => {
@@ -14,7 +20,7 @@ router.get('/', (req, res) => {
     })
 })
 
-router.post('/', (req, res) => {
+router.post('/', upperCase, (req, res) => {
     const { name } = req.body;
     if (!name) {
         return res.status(400).json({ message: 'please provide name for this user'})
@@ -60,7 +66,7 @@ router.delete('/:id', (req, res) => {
        }
 })
 
-router.put('/:id', (req, res) => {
+router.put('/:id', upperCase, (req, res) => {
     const { id } = req.params;
     const name  = req.body;
     if(!id) {
