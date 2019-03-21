@@ -19,7 +19,7 @@ router.post('/', (req, res) => {
     if (!name) {
         return res.status(400).json({ message: 'please provide name for this user'})
     } else {
-    return Users.insert(req.body)
+    return Users.insert({name})
     .then(user => {
         res.status(201).json(user)
     })
